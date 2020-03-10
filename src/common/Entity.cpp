@@ -21,6 +21,15 @@ Entity::Entity(std::string texture, glm::vec3 thePosition)
 	this->updateOnDeltaTimer = 0;
 }
 
+Entity::Entity(std::string texture, glm::vec3 thePosition,float width,float height)
+{
+	this->sprite = new Sprite("assets/" + texture + ".tga", width, height);
+	this->position = thePosition;
+	this->rotation = glm::vec3(0, 0, 0);
+	this->scale = glm::vec3(1.0f, 1.0f, 1.0f);
+	this->updateOnDeltaTimer = 0;
+}
+
 Entity::Entity(std::string texture, glm::vec3 thePosition, glm::vec3 theRotation)
 {
 	this->sprite = new Sprite("assets/" + texture + ".tga");
@@ -50,8 +59,7 @@ Entity::Entity(std::string texture,glm::vec3 thePosition, glm::vec3 theRotation,
 
 void Entity::updateOnFrame(){}
 
-
-int type;
+int type = 0;
 
 void Entity::updateFixed() 
 {	

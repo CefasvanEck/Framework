@@ -12,17 +12,14 @@ Main::~Main()
 
 }
 
-
 /**
  * Called when starting the game
  */
 void Main::start()
 {
-    this->spawnEntity(new Entity("rgba", glm::vec3(400, 300, 0)));
-
-    //entityList.push_back(new Entity("rgba", glm::vec3(400, 300, 0)));
-    //entityList.push_back(new Entity("kingkong", glm::vec3(900, 400, 0)));
-    //entityList.push_back(new Entity("pencils", glm::vec3(200, 400, 0)));
+    this->spawnEntity(new Entity("kingkong", glm::vec3(400, 300, 0),100,100));
+    this->spawnEntity(new Entity("rgba", glm::vec3(400, 600, 0), 100, 100));
+    this->spawnEntity(new Entity("pencils", glm::vec3(200, 400, 0), 100, 100));
 }
 
 /**

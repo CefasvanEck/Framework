@@ -9,6 +9,7 @@ class Sprite
 {
 	public:
 		Sprite(const std::string& imagepath);
+		Sprite(const std::string& imagepath, float scaleX, float scaleY);
 		virtual ~Sprite();
 
 		GLuint texture() { return _texture; };

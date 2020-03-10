@@ -14,7 +14,7 @@ public:
 	Entity(std::string texture, glm::vec3 position, glm::vec3 rotation);
 	Entity(glm::vec3 position, glm::vec3 scale, std::string texture);
 	Entity(std::string texture, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
-	
+	Entity(std::string texture, glm::vec3 thePosition, float width, float height);
 
 	virtual ~Entity();
 

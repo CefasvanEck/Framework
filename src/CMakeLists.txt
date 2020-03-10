@@ -71,12 +71,16 @@ add_library(common # ar rcs libcommon.a
 	common/sprite.cpp
 	common/Entity.cpp
 	common/Entity.h
+	common/ResourceManager.cpp
+	common/ResourceManager.h
 )
 
 # Demo
 add_executable(demo # g++ demo/demo.cpp -o demo
 	demo/Demo.cpp	
 	demo/Demo.h
+	demo/Main.cpp	
+	demo/Main.h
 )
 target_link_libraries(demo # g++ -lcommon
 	common
