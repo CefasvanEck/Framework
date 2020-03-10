@@ -18,6 +18,8 @@ class Sprite
 		unsigned int width() { return _width; };
 		unsigned int height() { return _height; };
 
+		void loadNewTGA(const std::string& imagepath);
+
 	private:
 		GLuint loadTGA(const std::string& imagepath);
 

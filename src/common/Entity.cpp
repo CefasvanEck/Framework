@@ -57,18 +57,15 @@ void Entity::updateFixed()
 {	
 	if (type == 0)
 	{
-		delete this->sprite;
-		this->sprite = new Sprite("assets/kingkong.tga");
+		this->sprite->loadNewTGA("assets/kingkong.tga");
 	}
 	if (type == 1)
 	{
-		delete this->sprite;
-		this->sprite = new Sprite("assets/pencils.tga");
+		this->sprite->loadNewTGA("assets/pencils.tga");
 	}
 	if (type == 2)
 	{
-		delete this->sprite;
-		this->sprite = new Sprite("assets/rgba.tga");
+		this->sprite->loadNewTGA("assets/rgba.tga");
 	}
 	++type;
 	if (type > 2)

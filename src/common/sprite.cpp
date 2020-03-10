@@ -50,6 +50,11 @@ Sprite::Sprite(const std::string& imagepath)
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_uv_buffer_data), g_uv_buffer_data, GL_STATIC_DRAW);
 }
 
+void Sprite::loadNewTGA(const std::string& imagepath)
+{
+	_texture = loadTGA(imagepath);
+}
+
 Sprite::~Sprite()
 {
 	glDeleteBuffers(1, &_vertexbuffer);
