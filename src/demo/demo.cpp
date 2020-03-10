@@ -1,9 +1,4 @@
-// Include GLEW
-#include <GL/glew.h>
-
-// Include GLFW
-#include <GLFW/glfw3.h>
-
+#include <demo/Main.h>
 #include <common/renderer.h>
 #include <common/camera.h>
 #include <common/sprite.h>
@@ -13,14 +8,22 @@
 #include <fstream>
 #include <iostream> 
 
-std::vector<Entity*> entityList;
-
-void println(std::string texttoconsole)
+void  println(std::string texttoconsole)
 {
 	std::cout << texttoconsole << std::endl;
 }
 
-std::string toS(float toString)
+void  println(float toString)
+{
+	std::cout << std::to_string(toString) << std::endl;
+}
+
+void  println(int toString)
+{
+	std::cout << std::to_string(toString) << std::endl;
+}
+
+std::string  toS(float toString)
 {
 	return std::to_string(toString);
 }
@@ -33,13 +36,13 @@ std::string toS(int toString)
 int main( void )
 {
 	Renderer renderer(1280, 720);
-
-	entityList.push_back(new Entity("rgba", glm::vec3(400,300,0)));
-	entityList.push_back(new Entity("kingkong", glm::vec3(900, 400, 0)));
-	entityList.push_back(new Entity("pencils", glm::vec3(200, 400, 0)));
-
+	Main main;
+	
+	main.start();
+	
 	do 
 	{
+		main.running();
 		// Update deltaTime
 		float deltaTime = renderer.updateDeltaTime();
 
@@ -53,16 +56,17 @@ int main( void )
 		// printf("(%f,%f)\n",cursor.x, cursor.y);
 
 		// Render all Sprites (Sprite*, xpos, ypos, xscale, yscale, rotation)
-		for (int i = 0; i < entityList.size(); i++)
+		for (int i = 0; i < main.getEntityList().size(); i++)
 		{
-			renderer.renderSprite(entityList[i]->getSprite(), entityList[i]->getPosition().x, entityList[i]->getPosition().y, entityList[i]->getScale().x, entityList[i]->getScale().y, entityList[i]->getRotation().x);
-			entityList[i]->updateOnFrame();
-			
-			println(toS(deltaTime));
+			renderer.renderSprite(main.getEntityList()[i]->getSprite(), main.getEntityList()[i]->getPosition().x, main.getEntityList()[i]->getPosition().y, main.getEntityList()[i]->getScale().x, main.getEntityList()[i]->getScale().y, main.getEntityList()[i]->getRotation().x);
+			main.getEntityList()[i]->updateOnFrame();
+			main.getEntityList()[i]->setUpdateOnDeltaTimer(deltaTime);
+			if (main.getEntityList()[i]->getDeltaTime() > 1)
+			{
+				main.getEntityList()[i]->updateFixed();
+				main.getEntityList()[i]->setUpdateOnDeltaTimer(-main.getEntityList()[i]->getDeltaTime());
+			}
 		}
-
-		static float rot_z = 0.0f;
-		rot_z += 3.141592f / 2 * deltaTime;
 
 		// Swap buffers
 		glfwSwapBuffers(renderer.window());
@@ -70,12 +74,13 @@ int main( void )
 
 	} // Check if the ESC key was pressed or the window was closed
 	while( glfwGetKey(renderer.window(), GLFW_KEY_ESCAPE ) != GLFW_PRESS && glfwWindowShouldClose(renderer.window()) == 0 );
-	for (int i = 0; i < entityList.size(); i++)
+	for (int i = 0; i < main.getEntityList().size(); i++)
 	{
-		delete entityList[i]->getSprite();
+		delete main.getEntityList()[i]->getSprite();
 	}
-
-	entityList.clear();
+	main.closing();
+	main.getEntityList().clear();
+	
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();
 

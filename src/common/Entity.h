@@ -14,8 +14,19 @@ public:
 	Entity(std::string texture, glm::vec3 position, glm::vec3 rotation);
 	Entity(glm::vec3 position, glm::vec3 scale, std::string texture);
 	Entity(std::string texture, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
+	
 
 	virtual ~Entity();
+
+	float getDeltaTime()
+	{
+		return this->updateOnDeltaTimer;
+	}
+
+	void Entity::setUpdateOnDeltaTimer(float setTime) 
+	{
+		this->updateOnDeltaTimer += setTime;
+	}
 
 	glm::vec3 getPosition()
 	{
@@ -37,18 +48,8 @@ public:
 		return this->sprite;
 	}
 
-	int getRotationType()
-	{
-		return this->rotateType;
-	}
-
-	void setRotationType(int theRotationType)
-	{
-		this->rotateType = theRotationType;
-	}
-
-	void updateOnDeltaTime() {}
-	void updateOnFrame() {}
+	void updateFixed();
+	void updateOnFrame();
 
 private:
 
@@ -56,11 +57,7 @@ private:
 	glm::vec3 rotation;
 	glm::vec3 scale;
 	Sprite* sprite;
-
-	/*
-	* 0 is no rotation,1 is clockwise and 2 is against the clock rotation
-	*/
-	int rotateType;
+	float updateOnDeltaTimer;
 
 protected:
 

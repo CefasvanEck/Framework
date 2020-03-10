@@ -75,7 +75,8 @@ add_library(common # ar rcs libcommon.a
 
 # Demo
 add_executable(demo # g++ demo/demo.cpp -o demo
-	demo/demo.cpp	
+	demo/Demo.cpp	
+	demo/Demo.h
 )
 target_link_libraries(demo # g++ -lcommon
 	common
