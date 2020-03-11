@@ -63,12 +63,12 @@ set(ALL_GRAPHICS_LIBS
 
 # Common (libcommon.a)
 add_library(common # ar rcs libcommon.a
-	common/camera.h
-	common/camera.cpp
-	common/renderer.h
-	common/renderer.cpp
-	common/sprite.h
-	common/sprite.cpp
+	common/Camera.h
+	common/Camera.cpp
+	common/Renderer.h
+	common/Renderer.cpp
+	common/Sprite.h
+	common/Sprite.cpp
 	common/Entity.cpp
 	common/Entity.h
 	common/ResourceManager.cpp
@@ -78,7 +78,6 @@ add_library(common # ar rcs libcommon.a
 # Demo
 add_executable(demo # g++ demo/demo.cpp -o demo
 	demo/Demo.cpp	
-	demo/Demo.h
 	demo/Main.cpp	
 	demo/Main.h
 )

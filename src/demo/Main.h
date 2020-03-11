@@ -1,7 +1,6 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include <demo/Demo.h>
 #include <vector>
 #include <common/renderer.h>
 #include "common/Entity.h"

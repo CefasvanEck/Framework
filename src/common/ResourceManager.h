@@ -1,7 +1,7 @@
 #ifndef RESOURCEMANAGER_H
 #define RESOURCEMANAGER_H
 
-#include <vector>
+#include <map>
 
 class ResourceManager
 {
@@ -9,9 +9,14 @@ public:
 	ResourceManager();
 	virtual ~ResourceManager();
 
+	void addTextureToMap(std::string texturePath,Sprite sprite)
+	{
+		this->textureMap[texturePath] = 23;
+	}
+
 	
 private:
-	std::vector<Sprite*> entityList;
+	std::map<std::string, int> textureMap;
 
 protected:
 

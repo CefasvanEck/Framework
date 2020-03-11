@@ -59,30 +59,8 @@ Entity::Entity(std::string texture,glm::vec3 thePosition, glm::vec3 theRotation,
 
 void Entity::updateOnFrame(){}
 
-int type = 0;
 
-void Entity::updateFixed() 
-{	
-	if (type == 0)
-	{
-		this->sprite->loadNewTGA("assets/kingkong.tga");
-	}
-	if (type == 1)
-	{
-		this->sprite->loadNewTGA("assets/pencils.tga");
-	}
-	if (type == 2)
-	{
-		this->sprite->loadNewTGA("assets/rgba.tga");
-	}
-	++type;
-	if (type > 2)
-	{
-		type = 0;
-	}
-}
 
-//pencils
-//rgba
+void Entity::updateFixed(){}
 
 Entity::~Entity(){}
