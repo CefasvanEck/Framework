@@ -8,16 +8,23 @@
 #include <fstream>
 #include <iostream> 
 
-void  println(std::string texttoconsole)
+/*
+A wrapper around std::cout << "text here" << std::endl;
+*/
+void println(std::string texttoconsole)
 {
 	std::cout << texttoconsole << std::endl;
 }
 
+/*
+Print a float
+*/
 void  println(float toString)
 {
 	std::cout << std::to_string(toString) << std::endl;
 }
 
+//Print an int
 void  println(int toString)
 {
 	std::cout << std::to_string(toString) << std::endl;
@@ -32,6 +39,9 @@ std::string toS(int toString)
 {
 	return std::to_string(toString);
 }
+
+float updateOnDeltaTimer;
+
 
 int main( void )
 {
@@ -60,11 +70,10 @@ int main( void )
 		{
 			renderer.renderSprite(main.getEntityList()[i]->getSprite(), main.getEntityList()[i]->getPosition().x, main.getEntityList()[i]->getPosition().y, main.getEntityList()[i]->getScale().x, main.getEntityList()[i]->getScale().y, main.getEntityList()[i]->getRotation().x);
 			main.getEntityList()[i]->updateOnFrame();
-			main.getEntityList()[i]->setUpdateOnDeltaTimer(deltaTime);
-			if (main.getEntityList()[i]->getDeltaTime() > 1)
+			updateOnDeltaTimer += deltaTime;
+			if (updateOnDeltaTimer > 1)
 			{
-				main.getEntityList()[i]->updateFixed();
-				main.getEntityList()[i]->setUpdateOnDeltaTimer(-main.getEntityList()[i]->getDeltaTime());
+				main.getEntityList()[i]->updateFixed();	
 			}
 		}
 

@@ -8,25 +8,10 @@ class Entity
 {
 
 public:
-
-	Entity(std::string texture);
-	Entity(std::string texture, glm::vec3 position);
-	Entity(std::string texture, glm::vec3 position, glm::vec3 rotation);
-	Entity(glm::vec3 position, glm::vec3 scale, std::string texture);
-	Entity(std::string texture, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
-	Entity(std::string texture, glm::vec3 thePosition, float width, float height);
+	Entity(std::string texture = "assets/missingtexture.tga", glm::vec3 position = glm::vec3(500,500,0), glm::vec3 rotation = glm::vec3(0, 0, 0), glm::vec3 scale = glm::vec3(1, 1, 1));
 
 	virtual ~Entity();
 
-	float getDeltaTime()
-	{
-		return this->updateOnDeltaTimer;
-	}
-
-	void Entity::setUpdateOnDeltaTimer(float setTime) 
-	{
-		this->updateOnDeltaTimer += setTime;
-	}
 
 	glm::vec3 getPosition()
 	{
@@ -57,7 +42,6 @@ private:
 	glm::vec3 rotation;
 	glm::vec3 scale;
 	Sprite* sprite;
-	float updateOnDeltaTimer;
 
 protected:
 

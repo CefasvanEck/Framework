@@ -17,9 +17,9 @@ Main::~Main()
  */
 void Main::start()
 {
-    this->addEntity(new Entity("kingkong", glm::vec3(400, 300, 0),100,100));
-    this->addEntity(new Entity("rgba", glm::vec3(400, 600, 0), 100, 100));
-    this->addEntity(new Entity("pencils", glm::vec3(200, 400, 0), 100, 100));
+    this->addEntity(new Entity("assets/missingtexture.tga"));
+    this->addEntity(new Entity());
+    this->addEntity(new Entity());
 }
 
 /**
@@ -27,7 +27,7 @@ void Main::start()
  */
 void Main::running()
 {
-
+    
 }
 
 /**
