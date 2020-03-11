@@ -32,7 +32,7 @@ public:
 		return entityList;
 	}
 
-	void Main::spawnEntity(Entity* entity)
+	void Main::addEntity(Entity* entity)
 	{
 		entityList.push_back(entity);
 	}
