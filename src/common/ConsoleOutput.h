@@ -1,3 +1,5 @@
+//This file was added by Cefas
+
 #ifndef CONSOLEOUTPUT_H
 #define CONSOLEOUTPUT_H
 

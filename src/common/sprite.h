@@ -1,3 +1,5 @@
+//This file was changed a bit by Cefas
+
 #ifndef SPRITE_H
 #define SPRITE_H
 

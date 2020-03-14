@@ -1,3 +1,5 @@
+//This file was added by Cefas
+
 #ifndef MAIN_H
 #define MAIN_H
 

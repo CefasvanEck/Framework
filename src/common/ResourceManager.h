@@ -1,3 +1,5 @@
+//This file was added by Cefas
+
 #ifndef RESOURCEMANAGER_H
 #define RESOURCEMANAGER_H
 
