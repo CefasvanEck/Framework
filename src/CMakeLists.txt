@@ -73,6 +73,8 @@ add_library(common # ar rcs libcommon.a
 	common/Entity.h
 	common/ResourceManager.cpp
 	common/ResourceManager.h
+	common/ConsoleOutput.cpp
+	common/ConsoleOutput.h
 )
 
 # Demo

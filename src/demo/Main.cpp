@@ -2,9 +2,9 @@
 #include <common/renderer.h>
 #include "common/Entity.h"
 
+
 Main::Main()
 {
-
 }
 
 Main::~Main()
@@ -17,9 +17,10 @@ Main::~Main()
  */
 void Main::start()
 {
-    this->addEntity(new Entity("assets/missingtexture.tga"));
-    this->addEntity(new Entity());
-    this->addEntity(new Entity());
+    this->addEntity(new Entity("assets/rgba.tga", glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(0, 0, 0)));
+    this->addEntity(new Entity("assets/kingkong.tga", glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(0, 0, 0)));
+    this->addEntity(new Entity("assets/pencils.tga", glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(0, 0, 0)));
+    
 }
 
 /**

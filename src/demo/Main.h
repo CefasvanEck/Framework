@@ -4,10 +4,18 @@
 #include <vector>
 #include <common/renderer.h>
 #include "common/Entity.h"
+#include "common/ConsoleOutput.h"
 
 class Main
 {
 public:
+
+	static Main& getInstance()
+	{
+		static Main instance;				  
+		return instance;
+	}
+
 	Main();
 	virtual ~Main();
 
@@ -37,12 +45,16 @@ public:
 		entityList.push_back(entity);
 	}
 
+	ConsoleOutput* Main::getConsole()
+	{
+		return console;
+	}
+
 private:
-	
+
 	std::vector<Entity*> entityList;
-
+	ConsoleOutput* console;
 protected:
-
 };
 
 #endif /* SPRITE_H */

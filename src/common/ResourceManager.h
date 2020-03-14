@@ -9,7 +9,7 @@ public:
 	ResourceManager();
 	virtual ~ResourceManager();
 
-	void addTextureToMap(std::string texturePath,Sprite sprite)
+	Sprite addTextureToMap(std::string texturePath)
 	{
 		this->textureMap[texturePath] = 23;
 	}

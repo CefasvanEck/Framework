@@ -9,15 +9,17 @@ class Sprite
 {
 	public:
 		Sprite(const std::string& imagepath);
-		Sprite(const std::string& imagepath, float scaleX, float scaleY);
 		virtual ~Sprite();
 
 		GLuint texture() { return _texture; };
 		GLuint vertexbuffer() { return _vertexbuffer; };
 		GLuint uvbuffer() { return _uvbuffer; };
 
-		unsigned int width() { return _width; };
-		unsigned int height() { return _height; };
+		unsigned int getWidth() { return _width; };
+		unsigned int getHeight() { return _height; };
+
+		void setWidth(float width);
+		void setHeight(float height);
 
 		void loadNewTGA(const std::string& imagepath);
 

@@ -49,6 +49,16 @@ Sprite::Sprite(const std::string& imagepath)
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_uv_buffer_data), g_uv_buffer_data, GL_STATIC_DRAW);
 }
 
+void Sprite::setWidth(float width)
+{
+	this->_width = width;
+}
+
+void Sprite::setHeight(float height)
+{
+	this->_height = height;
+}
+
 void Sprite::loadNewTGA(const std::string& imagepath)
 {
 	_texture = loadTGA(imagepath);

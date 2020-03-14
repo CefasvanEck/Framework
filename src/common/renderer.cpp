@@ -97,6 +97,8 @@ void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float 
 	glm::mat4 rotationMatrix    = glm::eulerAngleYXZ(0.0f, 0.0f, rot);
 	glm::mat4 scalingMatrix     = glm::scale(glm::mat4(1.0f), glm::vec3(sx, sy, 1.0f));
 
+
+
 	glm::mat4 modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 
 	glm::mat4 MVP = _projectionMatrix * viewMatrix * modelMatrix;

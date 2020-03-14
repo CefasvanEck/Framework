@@ -7,41 +7,9 @@
 #include <vector>
 #include <fstream>
 #include <iostream> 
-
-/*
-A wrapper around std::cout << "text here" << std::endl;
-*/
-void println(std::string texttoconsole)
-{
-	std::cout << texttoconsole << std::endl;
-}
-
-/*
-Print a float
-*/
-void  println(float toString)
-{
-	std::cout << std::to_string(toString) << std::endl;
-}
-
-//Print an int
-void  println(int toString)
-{
-	std::cout << std::to_string(toString) << std::endl;
-}
-
-std::string  toS(float toString)
-{
-	return std::to_string(toString);
-}
-
-std::string toS(int toString)
-{
-	return std::to_string(toString);
-}
+#include "demo/Main.h"
 
 float updateOnDeltaTimer;
-
 
 int main( void )
 {
@@ -68,12 +36,14 @@ int main( void )
 		// Render all Sprites (Sprite*, xpos, ypos, xscale, yscale, rotation)
 		for (int i = 0; i < main.getEntityList().size(); i++)
 		{
-			renderer.renderSprite(main.getEntityList()[i]->getSprite(), main.getEntityList()[i]->getPosition().x, main.getEntityList()[i]->getPosition().y, main.getEntityList()[i]->getScale().x, main.getEntityList()[i]->getScale().y, main.getEntityList()[i]->getRotation().x);
-			main.getEntityList()[i]->updateOnFrame();
+			Entity* entity = main.getEntityList()[i];
+			renderer.renderSprite(entity->getSprite(), 0.0f, 0.0f, entity->getScale().x, entity->getScale().y, entity->getRotation().x);
+			entity->updateOnFrame();
+
 			updateOnDeltaTimer += deltaTime;
 			if (updateOnDeltaTimer > 1)
 			{
-				main.getEntityList()[i]->updateFixed();	
+				entity->updateFixed();
 			}
 		}
 
