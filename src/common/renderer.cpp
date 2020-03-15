@@ -8,6 +8,9 @@
 #include <common/renderer.h>
 #include <common/ShaderProgram.h>
 
+/**
+ * Note: Ask the teacher why this can't be set in the header file
+ */
 ShaderProgram* shaderProgram;
 
 Renderer::Renderer(unsigned int w, unsigned int h)

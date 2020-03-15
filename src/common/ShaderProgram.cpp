@@ -18,27 +18,42 @@ ShaderProgram::~ShaderProgram()
 
 }
 
+/**
+ * Delete the shader program
+ */
 void ShaderProgram::deleteShader()
 {
 	// Cleanup VBO and shader
 	glDeleteProgram(getshaderProgramID());
 }
 
+/**
+ * Use the shader program by ID
+ */
 void ShaderProgram::useShaderProgram(GLuint idShaderProgram)
 {
 	glUseProgram(idShaderProgram);
 }
 
+/**
+ * Set the ID of the shader program 
+ */
 void ShaderProgram::setShaderID(GLuint idShaderProgram)
 {
 	shaderProgramID = idShaderProgram;
 }
 
+/**
+ * Getter for Shader Program ID
+ */
 GLuint ShaderProgram::getshaderProgramID()
 {
 	return shaderProgramID;
 }
 
+/**
+ * Load the shader, moved from Renderer to ShaderProgram
+ */
 GLuint ShaderProgram::loadShaders(const std::string& vertex_file_path, const std::string& fragment_file_path)
 {
 	// Create the shaders
