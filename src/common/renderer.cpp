@@ -25,6 +25,7 @@ Renderer::~Renderer()
 {
 	// Cleanup VBO and shader
 	shaderProgram->deleteShader();
+	delete shaderProgram;
 }
 
 int Renderer::init()

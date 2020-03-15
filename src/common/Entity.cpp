@@ -14,10 +14,7 @@ Entity::Entity(std::string texture, glm::vec3 position, glm::vec3 rotation, glm:
 	this->setScale(scale);
 }
 
-
 void Entity::updateOnFrame(){}
-
-
 
 void Entity::updateFixed(){}
 
