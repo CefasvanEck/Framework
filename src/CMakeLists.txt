@@ -79,7 +79,7 @@ add_library(common # ar rcs libcommon.a
 
 # Demo
 add_executable(demo # g++ demo/demo.cpp -o demo
-	demo/Demo.cpp	
+	demo/CavernFramework.cpp	
 	demo/Main.cpp	
 	demo/Main.h
 )
