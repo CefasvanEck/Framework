@@ -75,6 +75,8 @@ add_library(common # ar rcs libcommon.a
 	common/ResourceManager.h
 	common/ConsoleOutput.cpp
 	common/ConsoleOutput.h
+	common/ShaderProgram.cpp
+	common/ShaderProgram.h	
 )
 
 # Demo

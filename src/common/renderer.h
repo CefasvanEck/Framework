@@ -8,7 +8,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/euler_angles.hpp>
-
 #include <common/sprite.h>
 
 class Renderer
@@ -31,12 +30,6 @@ class Renderer
 		GLFWwindow* _window;
 		unsigned int _window_width;
 		unsigned int _window_height;
-
-		GLuint loadShaders(
-			const std::string& vertex_file_path,
-			const std::string& fragment_file_path
-		);
-
 		GLuint _programID;
 
 		glm::mat4 _projectionMatrix;
