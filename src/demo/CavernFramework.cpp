@@ -39,7 +39,7 @@ int main( void )
 		for (int i = 0; i < main.getEntityList().size(); i++)
 		{
 			Entity* entity = main.getEntityList()[i];
-			renderer.renderSprite(entity->getSprite(), 0.0f, 0.0f, entity->getScale().x, entity->getScale().y, entity->getRotation().x);
+			renderer.renderSprite(entity->getSprite(), entity->getPosition().x, entity->getPosition().y, entity->getScale().x, entity->getScale().y, entity->getRotation().x);
 			entity->updateOnFrame();
 
 			updateOnDeltaTimer += deltaTime;

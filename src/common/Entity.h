@@ -10,19 +10,28 @@ class Entity
 {
 
 public:
-	Entity(std::string texture = "assets/missingtexture.tga", glm::vec3 position = glm::vec3(0,0,0), glm::vec3 rotation = glm::vec3(0, 0, 0), glm::vec3 scale = glm::vec3(0, 0, 0));
+	Entity(std::string texture = "assets/missingtexture.tga", glm::vec3 position = glm::vec3(0,0,0), glm::vec3 rotation = glm::vec3(0, 0, 0), glm::vec3 scale = glm::vec3(1, 1, 1));
 
 	virtual ~Entity();
-
 
 	glm::vec3 getPosition()
 	{
 		return this->position;
 	}
 
+	void setPosition(glm::vec3 setPosition)
+	{
+		this->position = setPosition;
+	}
+
 	glm::vec3 getRotation()
 	{
 		return this->rotation;
+	}
+
+	void setRotation(glm::vec3 setRotation)
+	{
+		this->rotation = setRotation;
 	}
 
 	void setScale(glm::vec3 setScale)
