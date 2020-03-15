@@ -7,6 +7,7 @@
 
 Main::Main()
 {
+    console = new ConsoleOutput();
 }
 
 Main::~Main()
