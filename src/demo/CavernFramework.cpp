@@ -46,6 +46,7 @@ int main( void )
 			if (updateOnDeltaTimer > 1)
 			{
 				entity->updateFixed();
+				main.fixedRunning();
 			}
 		}
 
