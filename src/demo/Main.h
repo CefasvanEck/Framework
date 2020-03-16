@@ -7,6 +7,7 @@
 #include <common/renderer.h>
 #include "common/Entity.h"
 #include "common/ConsoleOutput.h"
+#include "common/ResourceManager.h"
 
 class Main
 {
@@ -25,6 +26,12 @@ public:
 	 * Called when starting the game
 	 */
 	void start();
+
+	/**
+	 * Called when running.
+	 It's fixed so it doesn't update on deltaTime
+	 */
+	void fixedRunning();
 
 	/**
 	 * Called when running the game
@@ -52,10 +59,17 @@ public:
 		return console;
 	}
 
+	ResourceManager* Main::getResourcemanager()
+	{
+		return resourcemanager;
+	}
+
 private:
 
 	std::vector<Entity*> entityList;
 	ConsoleOutput* console;
+	ResourceManager* resourcemanager;
+
 protected:
 };
 

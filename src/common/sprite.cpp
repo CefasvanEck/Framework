@@ -7,7 +7,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/euler_angles.hpp>
-
+#include <demo/Main.h>
 #include <common/sprite.h>
 
 Sprite::Sprite(const std::string& imagepath)
@@ -17,6 +17,8 @@ Sprite::Sprite(const std::string& imagepath)
 	_height = 0;
 
 	// Load image as texture
+
+	//Main::getInstance().
 	_texture = loadTGA(imagepath);
 
 	// Our vertices. Tree consecutive floats give a 3D vertex; Three consecutive vertices give a triangle.
@@ -61,9 +63,14 @@ void Sprite::setHeight(float height)
 	this->_height = height;
 }
 
-void Sprite::loadNewTGA(const std::string& imagepath)
+GLuint Sprite::loadNewTGA(const std::string& imagepath)
 {
-	_texture = loadTGA(imagepath);
+	return _texture = loadTGA(imagepath);
+}
+
+void Sprite::setTextureID(GLuint textureID)
+{
+	_texture = textureID;
 }
 
 Sprite::~Sprite()

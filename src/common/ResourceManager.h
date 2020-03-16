@@ -11,12 +11,8 @@ public:
 	ResourceManager();
 	virtual ~ResourceManager();
 
-	Sprite addTextureToMap(std::string texturePath)
-	{
-		this->textureMap[texturePath] = 23;
-	}
+	Sprite* loadTexture(std::string texturePath);
 
-	
 private:
 	std::map<std::string, int> textureMap;
 

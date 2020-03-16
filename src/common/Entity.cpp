@@ -8,7 +8,7 @@
 
 Entity::Entity(std::string texture, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
-	this->sprite = new Sprite(texture);
+	this->sprite = Main::getInstance().getResourcemanager()->loadTexture(texture);
 	this->setPosition(position);
 	this->setRotation(rotation);
 	this->setScale(scale);

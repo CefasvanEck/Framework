@@ -23,7 +23,10 @@ class Sprite
 		void setWidth(float width);
 		void setHeight(float height);
 
-		void loadNewTGA(const std::string& imagepath);
+		GLuint loadNewTGA(const std::string& imagepath);
+
+		void setTextureID(GLuint textureID);
+		
 
 	private:
 		GLuint loadTGA(const std::string& imagepath);
