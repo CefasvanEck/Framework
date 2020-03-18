@@ -26,10 +26,17 @@ class Sprite
 		GLuint loadNewTGA(const std::string& imagepath);
 
 		void setTextureID(GLuint textureID);
-		
+		void setShaderID(GLuint shaderID);
+		void setShaderPath(const std::string& imagepath);
+
+		GLuint getShaderID();
 
 	private:
 		GLuint loadTGA(const std::string& imagepath);
+
+		GLuint shaderProgramID;
+
+		std::string shaderpath;
 
 		GLuint _texture;
 		GLuint _vertexbuffer;

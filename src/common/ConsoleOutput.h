@@ -19,6 +19,8 @@ public:
 
 	void  println(unsigned int toString);
 
+	std::string toS(GLuint toString);
+
 	std::string  toS(float toString);
 
 	std::string toS(int toString);

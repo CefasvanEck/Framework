@@ -12,6 +12,8 @@
 
 Sprite::Sprite(const std::string& imagepath)
 {
+	shaderProgramID = -1;
+	shaderpath = "shaders/";
 	// these will be set correctly in loadTGA()
 	_width = 0;
 	_height = 0;
@@ -71,6 +73,16 @@ GLuint Sprite::loadNewTGA(const std::string& imagepath)
 void Sprite::setTextureID(GLuint textureID)
 {
 	_texture = textureID;
+}
+
+void Sprite::setShaderID(GLuint shaderID)
+{
+	this->shaderProgramID = shaderID;
+}
+
+GLuint Sprite::getShaderID()
+{
+	return this->shaderProgramID;
 }
 
 Sprite::~Sprite()

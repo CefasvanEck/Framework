@@ -35,6 +35,11 @@ void ConsoleOutput::println(unsigned int toString)
 	std::cout << std::to_string(toString) << std::endl;
 }
 
+std::string ConsoleOutput::toS(GLuint toString)
+{
+	return std::to_string(toString);
+}
+
 std::string ConsoleOutput::toS(float toString)
 {
 	return std::to_string(toString);

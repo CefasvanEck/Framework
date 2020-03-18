@@ -9,6 +9,7 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/euler_angles.hpp>
 #include <common/sprite.h>
+#include <common/ShaderProgram.h>
 
 class Renderer
 {
@@ -24,8 +25,12 @@ class Renderer
 
 		float updateDeltaTime();
 
+		
+
 	private:
 		int init();
+
+		ShaderProgram* shaderProgram;
 
 		GLFWwindow* _window;
 		unsigned int _window_width;

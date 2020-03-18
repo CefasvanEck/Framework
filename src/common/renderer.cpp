@@ -8,10 +8,7 @@
 #include <common/renderer.h>
 #include <common/ShaderProgram.h>
 
-/**
- * Note: Ask the teacher why this can't be set in the header file
- */
-ShaderProgram* shaderProgram;
+#include "demo/Main.h"
 
 Renderer::Renderer(unsigned int w, unsigned int h)
 {
@@ -70,13 +67,9 @@ int Renderer::init()
 	// Cull triangles which normal is not towards the camera
 	glEnable(GL_CULL_FACE);
 
-	// Create and compile our GLSL program from the shaders
-	_programID = shaderProgram->loadShaders("shaders/sprite.vert", "shaders/sprite.frag");
-
 	_projectionMatrix = glm::ortho(0.0f, (float)_window_width, (float)_window_height, 0.0f, 0.1f, 100.0f);
 
-	// Use our shader
-	shaderProgram->useShaderProgram(_programID);
+	_programID = shaderProgram->loadShaders("shaders/sprite.vert", "shaders/sprite.frag");
 	
 	return 0;
 }
@@ -97,6 +90,28 @@ float Renderer::updateDeltaTime() {
 
 void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float sy, float rot)
 {
+	//When an Entity has been added to the scene, the sprite will be created with the option for a different shader.
+	//I added the code below in the renderSprite and not the init() because I don't want to go through the list again to check if there is a
+	//new Entity with a Sprite.
+	//Also, there can be a new Entity with a new Shader that didn't exists when you started the game so now it will load while "playing" the game.
+	//Just make sure you don't add to many new Entities with new Shaders cuase that can created fps issues.
+	if (sprite->getShaderID() == -1)
+	{
+		// Create and compile our GLSL program from the shaders	
+		sprite->setShaderID(shaderProgram->loadShaders("shaders/sprite.vert", "shaders/sprite.frag"));	
+		//Load shader
+		std::string shaderIDLoaded = Main::getInstance().getConsole()->toS(sprite->getShaderID());
+		Main::getInstance().getConsole()->println("Loaded Shader with ID: " + shaderIDLoaded);
+	}
+	else
+	{
+		//Use shader
+		shaderProgram->useShaderProgram(sprite->getShaderID());
+	}
+
+	//Add setpath for Shader in Sprite
+	//Put Shaders in ResourceManager
+
 	glm::mat4 viewMatrix = getViewMatrix(); // get from Camera (Camera position and direction)
 
 	// Build the Model matrix
@@ -111,18 +126,18 @@ void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float 
 
 	// Send our transformation to the currently bound shader,
 	// in the "MVP" uniform
-	GLuint matrixID = glGetUniformLocation(_programID, "MVP");
+	GLuint matrixID = glGetUniformLocation(sprite->getShaderID(), "MVP");
 	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
 
 	// Bind our texture in Texture Unit 0
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, sprite->texture());
 	// Set our "textureSampler" sampler to user Texture Unit 0
-	GLuint textureID  = glGetUniformLocation(_programID, "textureSampler");
+	GLuint textureID  = glGetUniformLocation(sprite->getShaderID(), "textureSampler");
 	glUniform1i(textureID, 0);
 
 	// 1st attribute buffer : vertices
-	GLuint vertexPositionID = glGetAttribLocation(_programID, "vertexPosition");
+	GLuint vertexPositionID = glGetAttribLocation(sprite->getShaderID(), "vertexPosition");
 	glEnableVertexAttribArray(vertexPositionID);
 	glBindBuffer(GL_ARRAY_BUFFER, sprite->vertexbuffer());
 	glVertexAttribPointer(
@@ -135,7 +150,7 @@ void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float 
 	);
 
 	// 2nd attribute buffer : UVs
-	GLuint vertexUVID = glGetAttribLocation(_programID, "vertexUV");
+	GLuint vertexUVID = glGetAttribLocation(sprite->getShaderID(), "vertexUV");
 	glEnableVertexAttribArray(vertexUVID);
 	glBindBuffer(GL_ARRAY_BUFFER, sprite->uvbuffer());
 	glVertexAttribPointer(
