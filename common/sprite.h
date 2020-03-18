@@ -10,7 +10,7 @@
 class Sprite
 {
 	public:
-		Sprite(const std::string& imagepath);
+		Sprite(const std::string& imagepath, const std::string& shaderPath);
 		virtual ~Sprite();
 
 		GLuint texture() { return _texture; };
@@ -30,6 +30,8 @@ class Sprite
 		void setShaderPath(const std::string& imagepath);
 
 		GLuint getShaderID();
+
+		std::string getShaderPath();
 
 	private:
 		GLuint loadTGA(const std::string& imagepath);

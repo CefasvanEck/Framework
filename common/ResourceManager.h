@@ -16,6 +16,8 @@ public:
 	virtual ~ResourceManager();
 
 	Sprite* loadTexture(std::string texturePath);
+	Sprite* loadTextureWithShader(std::string texturePath, std::string shaderPath);
+	
 	GLuint loadShader(ShaderProgram* programOfShader, std::string shaderPath);
 
 private:

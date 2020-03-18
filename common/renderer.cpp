@@ -18,8 +18,6 @@ Renderer::Renderer(unsigned int w, unsigned int h)
 	this->init();
 }
 
-//Just a test Comment
-
 Renderer::~Renderer()
 {
 	// Cleanup VBO and shader
@@ -98,7 +96,7 @@ void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float 
 	if (sprite->getShaderID() == -1)
 	{
 		// Create and compile our GLSL program from the shaders	
-		sprite->setShaderID(Main::getInstance().getResourcemanager()->loadShader(shaderProgram, "shaders/sprite"));
+		sprite->setShaderID(Main::getInstance().getResourcemanager()->loadShader(shaderProgram, sprite->getShaderPath()));
 		//Load shader
 		std::string shaderIDLoaded = Main::getInstance().getConsole()->toS(sprite->getShaderID());
 	}

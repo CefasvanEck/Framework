@@ -70,6 +70,10 @@ GLuint ShaderProgram::loadShaders(const std::string& vertex_file_path, const std
 		}
 		vertexShaderStream.close();
 	}
+	else if (vertexShaderStream.fail())
+	{
+		printf("Can't find %s.\n", vertex_file_path.c_str());
+	}
 	else {
 		printf("Can't to open %s.\n", vertex_file_path.c_str());
 		getchar();
