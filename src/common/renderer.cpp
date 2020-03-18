@@ -28,9 +28,9 @@ Renderer::~Renderer()
 int Renderer::init()
 {
 	// Initialise GLFW
-	if( !glfwInit() )
+	if (!glfwInit())
 	{
-		fprintf( stderr, "Failed to initialize GLFW\n" );
+		fprintf(stderr, "Failed to initialize GLFW\n");
 		return -1;
 	}
 
@@ -39,9 +39,9 @@ int Renderer::init()
 	glfwWindowHint(GLFW_SAMPLES, 4);
 
 	// Open a window and create its OpenGL context
-	_window = glfwCreateWindow( _window_width, _window_height, "Demo", NULL, NULL);
-	if( _window == NULL ){
-		fprintf( stderr, "Failed to open GLFW window.\n" );
+	_window = glfwCreateWindow(_window_width, _window_height, "Demo", NULL, NULL);
+	if (_window == NULL) {
+		fprintf(stderr, "Failed to open GLFW window.\n");
 		glfwTerminate();
 		return -1;
 	}
@@ -69,8 +69,6 @@ int Renderer::init()
 
 	_projectionMatrix = glm::ortho(0.0f, (float)_window_width, (float)_window_height, 0.0f, 0.1f, 100.0f);
 
-	_programID = shaderProgram->loadShaders("shaders/sprite.vert", "shaders/sprite.frag");
-	
 	return 0;
 }
 
@@ -94,14 +92,13 @@ void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float 
 	//I added the code below in the renderSprite and not the init() because I don't want to go through the list again to check if there is a
 	//new Entity with a Sprite.
 	//Also, there can be a new Entity with a new Shader that didn't exists when you started the game so now it will load while "playing" the game.
-	//Just make sure you don't add to many new Entities with new Shaders cuase that can created fps issues.
+	//Just make sure you don't add to many new Entities with new Shaders case that can created fps issues.
 	if (sprite->getShaderID() == -1)
 	{
 		// Create and compile our GLSL program from the shaders	
-		sprite->setShaderID(shaderProgram->loadShaders("shaders/sprite.vert", "shaders/sprite.frag"));	
+		sprite->setShaderID(Main::getInstance().getResourcemanager()->loadShader(shaderProgram, "shaders/sprite"));
 		//Load shader
 		std::string shaderIDLoaded = Main::getInstance().getConsole()->toS(sprite->getShaderID());
-		Main::getInstance().getConsole()->println("Loaded Shader with ID: " + shaderIDLoaded);
 	}
 	else
 	{
@@ -109,15 +106,12 @@ void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float 
 		shaderProgram->useShaderProgram(sprite->getShaderID());
 	}
 
-	//Add setpath for Shader in Sprite
-	//Put Shaders in ResourceManager
-
 	glm::mat4 viewMatrix = getViewMatrix(); // get from Camera (Camera position and direction)
 
 	// Build the Model matrix
 	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(px, py, 0.0f));
-	glm::mat4 rotationMatrix    = glm::eulerAngleYXZ(0.0f, 0.0f, rot);
-	glm::mat4 scalingMatrix     = glm::scale(glm::mat4(1.0f), glm::vec3(sx, sy, 1.0f));
+	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(0.0f, 0.0f, rot);
+	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(sx, sy, 1.0f));
 
 
 	glm::mat4 modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
@@ -133,7 +127,7 @@ void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, sprite->texture());
 	// Set our "textureSampler" sampler to user Texture Unit 0
-	GLuint textureID  = glGetUniformLocation(sprite->getShaderID(), "textureSampler");
+	GLuint textureID = glGetUniformLocation(sprite->getShaderID(), "textureSampler");
 	glUniform1i(textureID, 0);
 
 	// 1st attribute buffer : vertices
@@ -163,7 +157,7 @@ void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float 
 	);
 
 	// Draw the triangles
-	glDrawArrays(GL_TRIANGLES, 0, 2*3); // 2*3 indices starting at 0 -> 2 triangles
+	glDrawArrays(GL_TRIANGLES, 0, 2 * 3); // 2*3 indices starting at 0 -> 2 triangles
 
 	glDisableVertexAttribArray(vertexPositionID);
 	glDisableVertexAttribArray(vertexUVID);

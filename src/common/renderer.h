@@ -35,7 +35,6 @@ class Renderer
 		GLFWwindow* _window;
 		unsigned int _window_width;
 		unsigned int _window_height;
-		GLuint _programID;
 
 		glm::mat4 _projectionMatrix;
 };

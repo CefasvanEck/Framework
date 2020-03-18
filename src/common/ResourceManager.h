@@ -4,6 +4,10 @@
 #define RESOURCEMANAGER_H
 
 #include <map>
+#include <common/ShaderProgram.h>
+
+#include "common/Sprite.h"
+
 
 class ResourceManager
 {
@@ -12,9 +16,11 @@ public:
 	virtual ~ResourceManager();
 
 	Sprite* loadTexture(std::string texturePath);
+	GLuint loadShader(ShaderProgram* programOfShader, std::string shaderPath);
 
 private:
 	std::map<std::string, int> textureMap;
+	std::map<std::string, int> shaderMap;
 
 protected:
 
