@@ -25,8 +25,6 @@ void Main::start()
 	//sprite-redfilter
 	this->addEntity(new Entity("assets/rgba.tga", "shaders/sprite-redfilter", glm::vec3(300, 300, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
 
-
-    //this->addEntity(new Entity());
     this->addEntity(new Entity("assets/rgba.tga", glm::vec3(100, 100, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
     this->addEntity(new Entity("assets/kingkong.tga", glm::vec3(100, 200, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
     this->addEntity(new Entity("assets/pencils.tga", glm::vec3(200, 300, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
