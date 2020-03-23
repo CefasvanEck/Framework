@@ -99,6 +99,7 @@ void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float 
 		sprite->setShaderID(Main::getInstance().getResourcemanager()->loadShader(shaderProgram, sprite->getShaderPath()));
 		//Load shader
 		std::string shaderIDLoaded = Main::getInstance().getConsole()->toS(sprite->getShaderID());
+		staticShader = new StaticShader(sprite->getShaderID());
 	}
 	else
 	{
@@ -122,6 +123,22 @@ void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float 
 	// in the "MVP" uniform
 	GLuint matrixID = glGetUniformLocation(sprite->getShaderID(), "MVP");
 	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
+
+	
+	Main::getInstance().getConsole()->println(Main::getInstance().getLightList().size());
+
+	//Loading and sending to shader
+	for (int i = 0; i < Main::getInstance().getLightList().size(); ++i)
+	{
+		Light* light = Main::getInstance().getLightList()[i];
+		
+		//Poisiton
+		glUniform3f(staticShader->idPos, light->getPosition()[0], light->getPosition()[1], light->getPosition()[2]);
+		//Colour RGBA
+		glUniform4f(staticShader->idCol, light->getColour()[0], light->getColour()[1], light->getColour()[2], light->getColour()[3]);
+		//Attenuation
+		glUniform4f(staticShader->idAtt, light->getAttenuation()[0], light->getAttenuation()[1], light->getAttenuation()[2], light->getAttenuation()[3]);
+	}
 
 	// Bind our texture in Texture Unit 0
 	glActiveTexture(GL_TEXTURE0);

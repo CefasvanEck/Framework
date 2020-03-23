@@ -5,6 +5,7 @@
 
 #include <vector>
 #include <common/renderer.h>
+#include "common/Light.h"
 #include "common/Entity.h"
 #include "common/ConsoleOutput.h"
 #include "common/ResourceManager.h"
@@ -44,29 +45,22 @@ public:
 	 */
 	void closing();
 
-	std::vector<Entity*> Main::getEntityList()
-	{
-		return entityList;
-	}
+	std::vector<Entity*> Main::getEntityList();
 
-	void Main::addEntity(Entity* entity)
-	{
-		entityList.push_back(entity);
-	}
+	std::vector<Light*> Main::getLightList();
 
-	ConsoleOutput* Main::getConsole()
-	{
-		return console;
-	}
+	void Main::addLightToList(Light* light);
 
-	ResourceManager* Main::getResourcemanager()
-	{
-		return resourcemanager;
-	}
+	void Main::addEntity(Entity* entity);
+
+	ConsoleOutput* Main::getConsole();
+
+	ResourceManager* Main::getResourcemanager();
 
 private:
 
 	std::vector<Entity*> entityList;
+	std::vector<Light*> lightList;
 	ConsoleOutput* console;
 	ResourceManager* resourcemanager;
 

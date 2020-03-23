@@ -10,6 +10,7 @@
 #include <glm/gtx/euler_angles.hpp>
 #include <common/sprite.h>
 #include <common/ShaderProgram.h>
+#include <common/StaticShader.h>
 
 class Renderer
 {
@@ -31,6 +32,7 @@ class Renderer
 		int init();
 
 		ShaderProgram* shaderProgram;
+		StaticShader* staticShader;
 
 		GLFWwindow* _window;
 		unsigned int _window_width;

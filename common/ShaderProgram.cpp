@@ -14,9 +14,7 @@ ShaderProgram::ShaderProgram()
 }
 
 ShaderProgram::~ShaderProgram()
-{
-
-}
+{}
 
 /**
  * Delete the shader program

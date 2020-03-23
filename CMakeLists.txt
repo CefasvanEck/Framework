@@ -77,6 +77,10 @@ add_library(common # ar rcs libcommon.a
 	common/ResourceManager.cpp
 	common/ShaderProgram.h
 	common/ShaderProgram.cpp
+	common/Light.cpp
+	common/Light.h
+	common/StaticShader.cpp
+	common/StaticShader.h
 )
 
 # Demo

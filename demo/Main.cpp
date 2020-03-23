@@ -22,8 +22,9 @@ Main::~Main()
  */
 void Main::start()
 {
+	//this->addLightToList(new Light(glm::vec3(1, 1, 1), 1, 1, 1));
 	//sprite-redfilter
-	this->addEntity(new Entity("assets/rgba.tga", "shaders/sprite-redfilter", glm::vec3(300, 300, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
+	this->addEntity(new Entity("assets/rgba.tga", "shaders/sprite-redfilter", glm::vec3(400, 300, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
 
     this->addEntity(new Entity("assets/rgba.tga", glm::vec3(100, 100, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
     this->addEntity(new Entity("assets/kingkong.tga", glm::vec3(100, 200, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
@@ -55,4 +56,34 @@ void Main::running()
 void Main::closing()
 {
 
+}
+
+std::vector<Entity*> Main::getEntityList()
+{
+	return entityList;
+}
+
+std::vector<Light*> Main::getLightList()
+{
+	return lightList;
+}
+
+void Main::addLightToList(Light* light)
+{
+	lightList.push_back(light);
+}
+
+void Main::addEntity(Entity* entity)
+{
+	entityList.push_back(entity);
+}
+
+ConsoleOutput* Main::getConsole()
+{
+	return console;
+}
+
+ResourceManager* Main::getResourcemanager()
+{
+	return resourcemanager;
 }
