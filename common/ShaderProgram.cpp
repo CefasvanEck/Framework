@@ -13,8 +13,7 @@ ShaderProgram::ShaderProgram()
 	shaderProgramID = 0;
 }
 
-ShaderProgram::~ShaderProgram()
-{}
+ShaderProgram::~ShaderProgram(){}
 
 /**
  * Delete the shader program

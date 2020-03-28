@@ -3,7 +3,6 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #define GLM_ENABLE_EXPERIMENTAL
@@ -11,6 +10,8 @@
 #include <common/sprite.h>
 #include <common/ShaderProgram.h>
 #include <common/StaticShader.h>
+#include <demo/Main.h>
+#include "common/Light.h"
 
 class Renderer
 {
@@ -26,10 +27,16 @@ class Renderer
 
 		float updateDeltaTime();
 
-		
+		std::vector<Light*> getLightList();
+		void addLight(Light* light);
+
+		std::vector<StaticShader*> getStaticShaderList();
+		void addStaticShader(StaticShader* shader);
 
 	private:
 		int init();
+		std::vector<StaticShader*> staticShaderList;
+		std::vector<Light*> lightList;
 
 		ShaderProgram* shaderProgram;
 		StaticShader* staticShader;

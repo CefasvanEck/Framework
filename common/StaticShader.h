@@ -7,19 +7,25 @@
 class StaticShader : public ShaderProgram
 {
 public:
-	StaticShader(int shaderID);
+	StaticShader(GLuint shaderID);
 	virtual ~StaticShader();
 	void getAllUniformLocations();
-	int idPos;
-	int idCol;
-	int idAtt;
+
+	GLuint idPos;
+	GLuint idCol;
+	GLuint idAtt;
+
+	GLuint getShaderID();
+	void setShaderID(GLuint shaderID);
+	int getMaxLights();
 
 private:
 	int maxLights;
+	int maxLightsID;
 	int **location_lightPosition;
 	int **location_lightColour;
 	int **location_attenuation;
-	int shaderID;
+	GLuint shaderID;
 
 protected:
 

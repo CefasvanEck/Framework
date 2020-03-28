@@ -4,7 +4,6 @@
 #include <common/renderer.h>
 #include "common/Entity.h"
 
-
 Main::Main()
 {
     console = new ConsoleOutput();
@@ -15,6 +14,11 @@ Main::~Main()
 {
     delete console;
     delete resourcemanager;
+	for (int i = 0; i < this->getEntityList().size(); ++i)
+	{
+		delete this->getEntityList()[i];
+	}
+	this->getEntityList().clear();
 }
 
 /**
@@ -22,14 +26,26 @@ Main::~Main()
  */
 void Main::start()
 {
-	//this->addLightToList(new Light(glm::vec3(1, 1, 1), 1, 1, 1));
 	//sprite-redfilter
-	this->addEntity(new Entity("assets/rgba.tga", "shaders/sprite-redfilter", glm::vec3(400, 300, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
+	this->addEntity(new Entity("assets/rgba.tga", "shaders/sprite-redfilter", glm::vec3(75, 100, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
+    this->addEntity(new Entity("assets/rgba.tga", "shaders/sprite-redfilter", glm::vec3(200, 100, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
+	this->addEntity(new Entity("assets/rgba.tga", "shaders/sprite-redfilter", glm::vec3(325, 100, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
+	this->addEntity(new Entity("assets/rgba.tga", "shaders/sprite-redfilter", glm::vec3(450, 100, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
+	this->addEntity(new Entity("assets/rgba.tga", "shaders/sprite-redfilter", glm::vec3(575, 100, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
+	this->addEntity(new Entity("assets/rgba.tga", "shaders/sprite-redfilter", glm::vec3(700, 100, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
+	
+	this->addEntity(new Entity("assets/rgba.tga", "shaders/sprite-redfilter", glm::vec3(75, 300, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
+	this->addEntity(new Entity("assets/rgba.tga", "shaders/sprite-redfilter", glm::vec3(75, 425, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
+	this->addEntity(new Entity("assets/rgba.tga", "shaders/sprite-redfilter", glm::vec3(75, 550, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
+	this->addEntity(new Entity("assets/rgba.tga", "shaders/sprite-redfilter", glm::vec3(75, 675, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
 
-    this->addEntity(new Entity("assets/rgba.tga", glm::vec3(100, 100, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
-    this->addEntity(new Entity("assets/kingkong.tga", glm::vec3(100, 200, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
-    this->addEntity(new Entity("assets/pencils.tga", glm::vec3(200, 300, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
-    this->addEntity(new Entity("assets/pencils.tga", glm::vec3(200, 500, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
+	this->addEntity(new Entity("assets/rgba.tga", "shaders/sprite-redfilter", glm::vec3(325, 300, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
+	this->addEntity(new Entity("assets/rgba.tga", "shaders/sprite-redfilter", glm::vec3(450, 425, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
+	this->addEntity(new Entity("assets/rgba.tga", "shaders/sprite-redfilter", glm::vec3(575, 550, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
+
+	this->addEntity(new Entity("assets/kingkong.tga", glm::vec3(700, 500, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
+    this->addEntity(new Entity("assets/pencils.tga", glm::vec3(700, 300, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
+    this->addEntity(new Entity("assets/pencils.tga", glm::vec3(700, 600, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
 }
 
 /**
@@ -61,16 +77,6 @@ void Main::closing()
 std::vector<Entity*> Main::getEntityList()
 {
 	return entityList;
-}
-
-std::vector<Light*> Main::getLightList()
-{
-	return lightList;
-}
-
-void Main::addLightToList(Light* light)
-{
-	lightList.push_back(light);
 }
 
 void Main::addEntity(Entity* entity)

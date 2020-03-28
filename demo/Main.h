@@ -5,7 +5,6 @@
 
 #include <vector>
 #include <common/renderer.h>
-#include "common/Light.h"
 #include "common/Entity.h"
 #include "common/ConsoleOutput.h"
 #include "common/ResourceManager.h"
@@ -47,10 +46,6 @@ public:
 
 	std::vector<Entity*> Main::getEntityList();
 
-	std::vector<Light*> Main::getLightList();
-
-	void Main::addLightToList(Light* light);
-
 	void Main::addEntity(Entity* entity);
 
 	ConsoleOutput* Main::getConsole();
@@ -60,7 +55,6 @@ public:
 private:
 
 	std::vector<Entity*> entityList;
-	std::vector<Light*> lightList;
 	ConsoleOutput* console;
 	ResourceManager* resourcemanager;
 

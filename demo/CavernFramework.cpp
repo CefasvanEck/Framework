@@ -15,9 +15,8 @@ float updateOnDeltaTimer;
 
 int main( void )
 {
-	Renderer renderer(1280, 720);
 	Main main;
-	
+	Renderer renderer(1280, 720);
 	main.start();
 	
 	do 
