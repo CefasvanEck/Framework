@@ -14,9 +14,25 @@ ResourceManager::~ResourceManager()
 
 }
 
+Sprite* ResourceManager::loadTextureWithShader(std::string texturePath, std::string shaderPath)
+{
+	Sprite* sprite = new Sprite(texturePath, shaderPath);
+	if (textureMap.find(texturePath) != textureMap.end())
+	{
+		sprite->setTextureID(textureMap[texturePath]);
+		Main::getInstance().getConsole()->println("Use Texture from memory");
+	}
+	else
+	{
+		textureMap[texturePath] = sprite->loadNewTGA(texturePath);
+		Main::getInstance().getConsole()->println("Created new Texture");
+	}
+	return sprite;
+}
+
 Sprite* ResourceManager::loadTexture(std::string texturePath)
 {
-	Sprite* sprite = new Sprite(texturePath);
+	Sprite* sprite = new Sprite(texturePath, "shaders/sprite");
 	if (textureMap.find(texturePath) != textureMap.end())
 	{
 		sprite->setTextureID(textureMap[texturePath]);

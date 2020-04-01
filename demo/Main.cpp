@@ -2,7 +2,7 @@
 
 #include <demo/Main.h>
 #include <common/renderer.h>
-#include "common/Entity.h"
+#include <common/Entity.h>
 
 Main::Main()
 {
@@ -26,7 +26,7 @@ Main::~Main()
  */
 void Main::start()
 {
-	//sprite-redfilter
+	//lighting
 	this->addEntity(new Entity("assets/rgba.tga", "shaders/sprite-redfilter", glm::vec3(75, 100, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
     this->addEntity(new Entity("assets/rgba.tga", "shaders/sprite-redfilter", glm::vec3(200, 100, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
 	this->addEntity(new Entity("assets/rgba.tga", "shaders/sprite-redfilter", glm::vec3(325, 100, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
@@ -42,10 +42,10 @@ void Main::start()
 	this->addEntity(new Entity("assets/rgba.tga", "shaders/sprite-redfilter", glm::vec3(325, 300, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
 	this->addEntity(new Entity("assets/rgba.tga", "shaders/sprite-redfilter", glm::vec3(450, 425, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
 	this->addEntity(new Entity("assets/rgba.tga", "shaders/sprite-redfilter", glm::vec3(575, 550, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
-
+	//No lighting
 	this->addEntity(new Entity("assets/kingkong.tga", glm::vec3(700, 500, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
-    this->addEntity(new Entity("assets/pencils.tga", glm::vec3(700, 300, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
-    this->addEntity(new Entity("assets/pencils.tga", glm::vec3(700, 600, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
+    this->addEntity(new Entity("assets/pencils.tga", glm::vec3(800, 300, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
+    this->addEntity(new Entity("assets/pencils.tga", glm::vec3(1000, 600, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1)));
 }
 
 /**

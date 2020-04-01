@@ -3,26 +3,35 @@
 #include <string>
 #include <vector>
 #include <fstream>
-
 #include <common/camera.h>
 #include <common/renderer.h>
 #include <common/ShaderProgram.h>
-
-#include "demo/Main.h"
+#include <demo/Main.h>
+#include <common/Light.h>
 
 Renderer::Renderer(unsigned int w, unsigned int h)
 {
 	_window_width = w;
 	_window_height = h;
-	shaderProgram = new ShaderProgram();
+	this->shaderProgram = new ShaderProgram();
 	this->init();
+	//Note to myself: do not forget the .0F or else it will be a double and NOT a float	
+	float sunLight = 55.0F;
+	//Create the first light in the framework
+	this->addLight(new Light(glm::vec3(0.0F, 0.0F, 0.0F), glm::vec3(sunLight, sunLight, sunLight), glm::vec3(1.0F, 0.0F, 0.0F)));
+	this->addLight(new Light(glm::vec3(0.0F, 0.0F, 0.0F), glm::vec3(255.0F, 0.0F, 0.0F), glm::vec3(1.0F, 3.0F, 0.00001F)));
 }
 
 Renderer::~Renderer()
 {
 	// Cleanup VBO and shader
-	shaderProgram->deleteShader();
-	delete shaderProgram;
+	this->shaderProgram->deleteShader();
+	delete this->shaderProgram;
+	for (int i = 0; i < this->getLightList().size(); ++i)
+	{
+		delete this->getLightList()[i];
+	}
+	this->getLightList().clear();
 }
 
 int Renderer::init()
@@ -33,7 +42,7 @@ int Renderer::init()
 		fprintf(stderr, "Failed to initialize GLFW\n");
 		return -1;
 	}
-
+	
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 	glfwWindowHint(GLFW_SAMPLES, 4);
@@ -86,6 +95,26 @@ float Renderer::updateDeltaTime() {
 	return deltaTime;
 }
 
+std::vector<Light*> Renderer::getLightList()
+{
+	return this->lightList;
+}
+
+void Renderer::addLight(Light* light)
+{
+	this->lightList.push_back(light);
+}
+
+std::vector<StaticShader*> Renderer::getStaticShaderList()
+{
+	return this->staticShaderList;
+}
+
+void Renderer::addStaticShader(StaticShader* shader)
+{
+	this->staticShaderList.push_back(shader);
+}
+
 void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float sy, float rot)
 {
 	//When an Entity has been added to the scene, the sprite will be created with the option for a different shader.
@@ -96,14 +125,14 @@ void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float 
 	if (sprite->getShaderID() == -1)
 	{
 		// Create and compile our GLSL program from the shaders	
-		sprite->setShaderID(Main::getInstance().getResourcemanager()->loadShader(shaderProgram, "shaders/sprite"));
+		sprite->setShaderID(Main::getInstance().getResourcemanager()->loadShader(this->shaderProgram, sprite->getShaderPath()));
 		//Load shader
-		std::string shaderIDLoaded = Main::getInstance().getConsole()->toS(sprite->getShaderID());
+		this->addStaticShader(new StaticShader(sprite->getShaderID()));
 	}
 	else
 	{
 		//Use shader
-		shaderProgram->useShaderProgram(sprite->getShaderID());
+		this->shaderProgram->useShaderProgram(sprite->getShaderID());
 	}
 
 	glm::mat4 viewMatrix = getViewMatrix(); // get from Camera (Camera position and direction)
@@ -122,6 +151,46 @@ void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float 
 	// in the "MVP" uniform
 	GLuint matrixID = glGetUniformLocation(sprite->getShaderID(), "MVP");
 	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
+
+	//Send vieuwMatrix, translationMatrix/transformationMatrix and modelMatrix to the shader for 2D lightning calculation
+	//Vieuw matrix to shader
+	GLuint vieuwMatrixID = glGetUniformLocation(sprite->getShaderID(), "viewMatrix");
+	glUniformMatrix4fv(vieuwMatrixID, 1, GL_FALSE, &viewMatrix[0][0]);
+	//transformation Matrix to shader
+	GLuint translationMatrixID = glGetUniformLocation(sprite->getShaderID(), "transformationMatrix");
+	glUniformMatrix4fv(translationMatrixID, 1, GL_FALSE, &translationMatrix[0][0]);
+	//model ViewMatrix Matrix to shader
+	GLuint modelMatrixMatrixID = glGetUniformLocation(sprite->getShaderID(), "modelViewMatrix");
+	glUniformMatrix4fv(modelMatrixMatrixID, 1, GL_FALSE, &modelMatrix[0][0]);
+
+	GLuint idMaxLights = glGetUniformLocation(sprite->getShaderID(), "maxLights");
+
+	int maxLights = this->getStaticShaderList()[0]->getMaxLights();
+	glUniform1i(idMaxLights, this->getLightList().size());
+
+	//Loading and sending to shader
+	for (int i = 0; i < this->getLightList().size(); ++i)
+	{
+		Light* light = this->getLightList()[i];
+		//Load position of the light
+		std::string lightPositionString = "lightPosition[" + std::to_string(i) + "]";
+		GLuint idPos = glGetUniformLocation(sprite->getShaderID(), lightPositionString.c_str());
+		//End
+		//Load colour/color of the light
+		std::string lightColourString = "lightColour[" + std::to_string(i) + "]";
+		GLuint idCol = glGetUniformLocation(sprite->getShaderID(), lightColourString.c_str());
+		//Load attenuation of the light
+		std::string lightAttenuationString = "lightAttenuation[" + std::to_string(i) + "]";
+		GLuint idAtt = glGetUniformLocation(sprite->getShaderID(), lightAttenuationString.c_str());
+		//End
+		
+		//Position
+		glUniform3f(idPos, light->getPosition()[0], light->getPosition()[1], light->getPosition()[2]);
+		//Colour RGBA
+		glUniform3f(idCol, light->getColour()[0], light->getColour()[1], light->getColour()[2]);
+		//Attenuation
+		glUniform3f(idAtt, light->getAttenuation()[0], light->getAttenuation()[1], light->getAttenuation()[2]);
+	}
 
 	// Bind our texture in Texture Unit 0
 	glActiveTexture(GL_TEXTURE0);

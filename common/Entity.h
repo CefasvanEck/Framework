@@ -55,7 +55,7 @@ public:
 		this->sprite = theSpirte;
 	}
 
-	Entity::Sprite *getSprite()
+	Sprite *getSprite()
 	{
 		return this->sprite;
 	}

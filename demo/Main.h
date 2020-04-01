@@ -44,13 +44,13 @@ public:
 	 */
 	void closing();
 
-	std::vector<Entity*> Main::getEntityList();
+	std::vector<Entity*> getEntityList();
 
-	void Main::addEntity(Entity* entity);
+	void addEntity(Entity* entity);
 
-	ConsoleOutput* Main::getConsole();
+	ConsoleOutput* getConsole();
 
-	ResourceManager* Main::getResourcemanager();
+	ResourceManager* getResourcemanager();
 
 private:
 

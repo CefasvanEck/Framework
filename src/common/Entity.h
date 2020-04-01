@@ -11,6 +11,7 @@ class Entity
 
 public:
 	Entity(std::string texture = "assets/missingtexture.tga", glm::vec3 position = glm::vec3(0,0,0), glm::vec3 rotation = glm::vec3(0, 0, 0), glm::vec3 scale = glm::vec3(1, 1, 1));
+	Entity(std::string texture = "assets/missingtexture.tga", std::string shaderPath = "shader/sprite", glm::vec3 position = glm::vec3(0, 0, 0), glm::vec3 rotation = glm::vec3(0, 0, 0), glm::vec3 scale = glm::vec3(1, 1, 1));
 
 	virtual ~Entity();
 
@@ -49,7 +50,12 @@ public:
 		return this->scale;
 	}
 
-	Entity::Sprite *getSprite()
+	void setSprite(Sprite* theSpirte)
+	{
+		this->sprite = theSpirte;
+	}
+
+	Sprite *getSprite()
 	{
 		return this->sprite;
 	}

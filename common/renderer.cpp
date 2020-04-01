@@ -7,7 +7,7 @@
 #include <common/renderer.h>
 #include <common/ShaderProgram.h>
 #include <demo/Main.h>
-#include "common/Light.h"
+#include <common/Light.h>
 
 Renderer::Renderer(unsigned int w, unsigned int h)
 {
@@ -15,17 +15,11 @@ Renderer::Renderer(unsigned int w, unsigned int h)
 	_window_height = h;
 	this->shaderProgram = new ShaderProgram();
 	this->init();
-	//Note to myself: do not forget the .0F or else it will be a double and NOT a float
-	
+	//Note to myself: do not forget the .0F or else it will be a double and NOT a float	
 	float sunLight = 55.0F;
-	
-
-
 	//Create the first light in the framework
-	this->addLight(new Light(glm::vec3(0.0F, 0.0F, 0.0F), glm::vec3(255.0F, 0.0F, 0.0F), glm::vec3(1.0F, 3.0F, 0.00001F)));
-
-
 	this->addLight(new Light(glm::vec3(0.0F, 0.0F, 0.0F), glm::vec3(sunLight, sunLight, sunLight), glm::vec3(1.0F, 0.0F, 0.0F)));
+	this->addLight(new Light(glm::vec3(0.0F, 0.0F, 0.0F), glm::vec3(255.0F, 0.0F, 0.0F), glm::vec3(1.0F, 3.0F, 0.00001F)));
 }
 
 Renderer::~Renderer()
@@ -189,11 +183,6 @@ void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float 
 		std::string lightAttenuationString = "lightAttenuation[" + std::to_string(i) + "]";
 		GLuint idAtt = glGetUniformLocation(sprite->getShaderID(), lightAttenuationString.c_str());
 		//End
-		//Movinh the red light just for testing, later removed
-		if (i == 0)
-		{
-			light->setPosition(glm::vec3(light->getPosition()[0] + 0.5F, light->getPosition()[1], light->getPosition()[2]));
-		}
 		
 		//Position
 		glUniform3f(idPos, light->getPosition()[0], light->getPosition()[1], light->getPosition()[2]);

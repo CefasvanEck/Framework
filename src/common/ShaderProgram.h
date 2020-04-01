@@ -3,13 +3,17 @@
 #ifndef SHADERPROGRAM_H
 #define SHADERPROGRAM_H
 
+#define GLM_ENABLE_EXPERIMENTAL
+
 #include <glm/glm.hpp>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-
 #include <glm/gtc/matrix_transform.hpp>
-#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/euler_angles.hpp>
+#include <string>
+#include <iostream>
+
+
 
 class ShaderProgram
 {
@@ -35,4 +39,4 @@ protected:
 
 };
 
-#endif /* SPRITE_H */
+#endif /* SHADERPROGRAM_H */

@@ -10,10 +10,10 @@
 #include <demo/Main.h>
 #include <common/sprite.h>
 
-Sprite::Sprite(const std::string& imagepath)
+Sprite::Sprite(const std::string& imagepath, const std::string& shaderPath)
 {
 	shaderProgramID = -1;
-	shaderpath = "shaders/";
+	shaderpath = shaderPath;
 	// these will be set correctly in loadTGA()
 	_width = 0;
 	_height = 0;
@@ -83,6 +83,16 @@ void Sprite::setShaderID(GLuint shaderID)
 GLuint Sprite::getShaderID()
 {
 	return this->shaderProgramID;
+}
+
+void Sprite::setShaderPath(const std::string& imagepath)
+{
+	shaderpath = imagepath;
+}
+
+std::string Sprite::getShaderPath()
+{
+	return shaderpath;
 }
 
 Sprite::~Sprite()
